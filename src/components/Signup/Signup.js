@@ -6,14 +6,16 @@ export default function Signup() {
     const [Email, setEmail] = useState("")
     const [Password, setPassword] = useState("")
 
-    async function createUser () {
+    async function createUser() {
         let data = {
-            username: Username,
-            email: Email,
-            password: Password
+            "username": Username,
+            "email": Email,
+            "password": Password
         }
 
-        const url = "http://localhost:3001/createUser"
+        console.log(data)
+
+        const url = "http://localhost:3000/createUser"
         let res = await fetch(url, {
             method: "POST",
             cors: "*",
@@ -29,8 +31,7 @@ export default function Signup() {
         .catch((error) => {
         console.error('Error:', error);
         });
-        console.log(res.json())
-        // return res.json()
+        return
     }
 
     return (
