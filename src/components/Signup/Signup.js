@@ -1,7 +1,19 @@
 import React, { useState } from 'react'
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
+
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 export default function Signup() {
+    cookies.remove("username")
+    cookies.remove("email")
+    cookies.remove("password")
+
+    const navigate = useNavigate();
+
     const [Username, setUsername] = useState("")
     const [Email, setEmail] = useState("")
     const [Password, setPassword] = useState("")
@@ -13,10 +25,14 @@ export default function Signup() {
             "password": Password
         }
 
+        cookies.set("username", Username)
+        cookies.set("email", Email)
+        cookies.set("password", Password)
+
         console.log(data)
 
-        const url = "http://localhost:3000/createUser"
-        let res = await fetch(url, {
+        const url = "http://localhost:3001/createUser"
+        await fetch(url, {
             method: "POST",
             cors: "*",
             headers: {
@@ -26,10 +42,11 @@ export default function Signup() {
         })
         .then(response => response.json())
         .then(data => {
-        console.log('Success:', data);
+            console.log('Success:', data);
+            navigate('/');
         })
         .catch((error) => {
-        console.error('Error:', error);
+            console.error('Error:', error);
         });
         return
     }
@@ -51,10 +68,10 @@ export default function Signup() {
                     <input value={Username} onInput={e => setUsername(e.target.value)} className='drop-shadow-xl w-full h-[60px] rounded px-4' placeholder='Username' type="text" />
                 </div>
                 <div className='mb-8'>
-                <input value={Email} onInput={e => setEmail(e.target.value)} className='drop-shadow-xl w-full h-[60px] rounded px-4' placeholder='Email' type="email" />
+                    <input value={Email} onInput={e => setEmail(e.target.value)} className='drop-shadow-xl w-full h-[60px] rounded px-4' placeholder='Email' type="email" />
                 </div>
                 <div>
-                <input value={Password} onInput={e => setPassword(e.target.value)} type="password" className='drop-shadow-xl w-full h-[60px] rounded px-4' placeholder='Password' />
+                    <input value={Password} onInput={e => setPassword(e.target.value)} type="password" className='drop-shadow-xl w-full h-[60px] rounded px-4' placeholder='Password' />
                 </div>
             </div>
             <div id="link" className='text-linkText mb-12'>
