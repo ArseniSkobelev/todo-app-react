@@ -10,6 +10,7 @@ module.exports = {
       linkText: '#7184E5',
       white: '#ffffff',
       black: '#000000',
+      red: '#ff0000'
     }
   },
   plugins: [],

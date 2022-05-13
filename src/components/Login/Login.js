@@ -10,12 +10,13 @@ export default function Login() {
     cookies.remove("username")
     cookies.remove("email")
     cookies.remove("password")
-
+    
     const navigate = useNavigate();
-
+    
     const [Username, setUsername] = useState("")
     const [Password, setPassword] = useState("")
-
+    
+    const [errorMessage, setErrorMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false)
 
     async function checkLogin() {
@@ -42,11 +43,18 @@ export default function Login() {
             cookies.set("username", Username)
             cookies.set("password", Password)
             setIsLoading(false)
-            navigate('/main');
+            if(data.message === true) {
+                navigate('/main');
+            } else {
+                setErrorMessage("❌ The username or password were incorrect!")
+                setTimeout(() => {
+                setErrorMessage()
+                }, 3000);
+            }
         })
         .catch((error) => {
             setIsLoading(false)
-            console.error('Error:', error);
+            return console.error('Error:', error);
         });
         return
     }
@@ -60,9 +68,9 @@ export default function Login() {
                 </div>
                 : 
                 <div className='bg-bg h-[100vh] flex items-center flex-col py-12'>
-                    <div className='w-[90%] sm:w-[70%] md:w-[60%] lg:w-[50%] xl:w-[30%] flex flex-col'>
+                    <div className='w-[90%] sm:w-[70%] md:w-[60%] items-center lg:w-[50%] xl:w-[30%] flex flex-col'>
                         <div id="upper" className='mb-12'>
-                            <h1 className='text-mainText text-3xl font-semibold mb-8'>ToDo App</h1>
+                            <h1 className='text-mainText text-3xl font-semibold mb-8'>ToDo App 🗿</h1>
                             <h1 className='text-mainText text-2xl font-semibold mb-2'>
                                 Login
                             </h1>
@@ -71,7 +79,7 @@ export default function Login() {
                                 account to use this service
                             </p>
                         </div>
-                        <div id="inputs" className='w-[90%] mb-4'>
+                        <div id="inputs" className='w-[100%] mb-4'>
                             <div className='mb-8'>
                                 <input value={Username} onInput={e => setUsername(e.target.value)} className='drop-shadow-xl w-full h-[60px] rounded px-4' placeholder='Username' type="text" />
                             </div>
@@ -88,7 +96,10 @@ export default function Login() {
                             </div>
                         </div>
                     </div>
-                </div>
+                        {errorMessage && (
+                            <p className="bottom-0 absolute py-8 px-4 mb-2 rounded bg-black text-white"> {errorMessage} </p>
+                        )}
+                </div>     
           }
       </div>
   )

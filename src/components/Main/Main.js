@@ -28,7 +28,7 @@ export default function Main() {
 
   return (
     <div className='bg-bg h-[100vh] flex items-center flex-col py-12'>
-    <div className='w-[30%] flex flex-col'>
+    <div className='w-[90%] sm:w-[70%] md:w-[60%] items-center lg:w-[50%] xl:w-[30%] flex flex-col'>
         <div id="upper" className='mb-12'>
             <div id="upper-title" className='flex row items-center mb-2'>
               <div id="svg" className='flex items-center'>
@@ -40,7 +40,7 @@ export default function Main() {
                 </svg>
               </div>
               <h1 className='text-mainText text-3xl font-semibold ml-4'>
-                  Welcome back, {username}
+                  Welcome back, <span className='capitalize'>{username}</span>
               </h1>
             </div>
             <p className='text-xl w-[90%] pl-16'>
