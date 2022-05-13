@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
@@ -10,16 +10,21 @@ export default function Main() {
 
   const navigate = useNavigate();
 
-  if(!userSession) {
-    navigate("/login")
-  }
+  console.log(userSession)
 
-  let logout = () => {
+  let Logout = () => {
     cookies.remove("username")
     cookies.remove("email")
     cookies.remove("password")
-    navigate('/login')
+    navigate("/login")
   }
+
+  useEffect(() => {
+    if(userSession === false) {
+      navigate("/login")
+    }
+  })
+  
 
   return (
     <div className='bg-bg h-[100vh] flex items-center flex-col py-12'>
@@ -27,7 +32,7 @@ export default function Main() {
         <div id="upper" className='mb-12'>
             <div id="upper-title" className='flex row items-center mb-2'>
               <div id="svg" className='flex items-center'>
-                <svg xmlns="http://www.w3.org/2000/svg" width="44.943" height="26.657" viewBox="0 0 44.943 26.657" className='cursor-pointer' onClick={logout}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="44.943" height="26.657" viewBox="0 0 44.943 26.657" className='cursor-pointer' onClick={Logout}>
                   <g id="Icon_feather-arrow-left" data-name="Icon feather-arrow-left" transform="translate(-5.5 -4.672)">
                     <path id="Path_1" data-name="Path 1" d="M48.443,18H7.5" transform="translate(0)" fill="none" stroke="#000" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4"/>
                     <path id="Path_2" data-name="Path 2" d="M18,28.5,7.5,18,18,7.5" fill="none" stroke="#000" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4"/>
