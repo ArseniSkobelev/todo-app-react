@@ -8,6 +8,7 @@ import Login from './components/Login/Login'
 import Cookies from 'universal-cookie';
 import Signup from './components/Signup/Signup';
 
+
 import {
   BrowserRouter,
   Routes,
@@ -33,7 +34,7 @@ if(userSession == null) {
 let IsLoggedIn = (props) => {
   const cookie = props.isLoggedIn;
   
-  if(!cookie) {
+  if(cookie !== true) {
     return <Login />
   }
   return <Main />
@@ -46,8 +47,9 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<IsLoggedIn isLoggedIn={isLoggedInVar} />} />
-      <Route path="login" element={<Login />} />
-      <Route path="signup" element={<Signup />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/main" element={<Main />} />
     </Routes>
   </BrowserRouter>
 );

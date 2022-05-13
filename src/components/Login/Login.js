@@ -22,11 +22,9 @@ export default function Login() {
             "password": Password
         }
 
-        cookies.set("username", Username)
-        cookies.set("password", Password)
-
+        
         console.log(data)
-
+        
         const url = "http://localhost:3001/checkLogin"
         await fetch(url, {
             method: "POST",
@@ -39,7 +37,9 @@ export default function Login() {
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
-            navigate('/');
+            cookies.set("username", Username)
+            cookies.set("password", Password)
+            navigate('/main');
         })
         .catch((error) => {
             console.error('Error:', error);
