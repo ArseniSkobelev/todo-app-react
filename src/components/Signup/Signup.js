@@ -63,9 +63,10 @@ export default function Signup() {
                 </div> 
                 : 
                 <div className='bg-bg h-[100vh] flex items-center flex-col py-12'>
-                    <div className='w-[30%] flex flex-col'>
+                    <div className='w-[90%] sm:w-[70%] md:w-[60%] lg:w-[50%] xl:w-[30%] flex flex-col'>
                         <div id="upper" className='mb-12'>
-                            <h1 className='text-mainText text-3xl font-semibold mb-2'>
+                            <h1 className='text-mainText text-3xl font-semibold mb-8'>ToDo App</h1>
+                            <h1 className='text-mainText text-2xl font-semibold mb-2'>
                                 Create a new account
                             </h1>
                             <p className='text-xl w-[90%]'>
@@ -88,7 +89,7 @@ export default function Signup() {
                             <i><Link to="/login">Already have an account? Login here</Link></i>
                         </div>
                         <div id="btn" className='flex justify-center items-center w-[90%]'>
-                            <div className='cursor-pointer drop-shadow-xl w-[50%] h-[60px] flex items-center justify-center font-semibold rounded bg-white' onClick={createUser}>
+                            <div className='cursor-pointer drop-shadow-xl w-[50%] h-[60px] flex items-center text-center justify-center font-semibold rounded bg-white' onClick={createUser}>
                                 Create account
                             </div>
                         </div>
