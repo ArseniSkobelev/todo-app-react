@@ -14,6 +14,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import CreateTodo from './components/CreateTodo/CreateTodo';
 
 const cookies = new Cookies();
 
@@ -50,6 +51,7 @@ root.render(
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/main" element={<Main />} />
+      <Route path="/create" element={<CreateTodo />} />
     </Routes>
   </BrowserRouter>
 );

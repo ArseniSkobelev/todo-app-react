@@ -6,29 +6,26 @@ import { Spinner } from "@chakra-ui/spinner";
 
 const cookies = new Cookies();
 
-export default function Login() {
-  cookies.remove("username");
-  cookies.remove("email");
-  cookies.remove("password");
-
+export default function CreateTodo() {
   const navigate = useNavigate();
 
-  const [Username, setUsername] = useState("");
-  const [Password, setPassword] = useState("");
+  const [TodoTitle, setTodoTitle] = useState("");
 
-  const [errorMessage, setErrorMessage] = useState("");
+  const [statusMessage, setStatusMessage] = useState("");
+
   const [isLoading, setIsLoading] = useState(false);
 
   async function checkLogin() {
     setIsLoading(true);
     let data = {
-      username: Username,
-      password: Password,
+      title: TodoTitle,
+      status: 1,
+      owner: cookies.get("username"),
     };
 
     console.log(data);
 
-    const url = "http://localhost:3001/checkLogin";
+    const url = "http://localhost:3001/createTodo";
     await fetch(url, {
       method: "POST",
       cors: "*",
@@ -39,17 +36,11 @@ export default function Login() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Success:", data);
-        cookies.set("username", Username);
         setIsLoading(false);
-        if (data.message === true) {
-          navigate("/main");
-        } else {
-          setErrorMessage("❌ The username or password were incorrect!");
-          setTimeout(() => {
-            setErrorMessage();
-          }, 3000);
-        }
+        setStatusMessage(data.message);
+        setTimeout(() => {
+          setStatusMessage();
+        }, 3000);
       })
       .catch((error) => {
         setIsLoading(false);
@@ -57,7 +48,6 @@ export default function Login() {
       });
     return;
   }
-
   return (
     <div>
       {isLoading ? (
@@ -79,38 +69,27 @@ export default function Login() {
                 ToDo App 🗿
               </h1>
               <h1 className="text-mainText text-2xl font-semibold mb-2">
-                Login
+                Create Todo
               </h1>
               <p className="text-xl w-[70%]">
-                Enter your login data or create a new account to use this
-                service
+                Enter a todo title and click the 'Create todo' button to create
+                a new todo.
               </p>
             </div>
             <div id="inputs" className="w-[100%] mb-4">
               <div className="mb-8">
                 <input
-                  value={Username}
-                  onInput={(e) => setUsername(e.target.value)}
+                  value={TodoTitle}
+                  onInput={(e) => setTodoTitle(e.target.value)}
                   className="drop-shadow-xl w-full h-[60px] rounded px-4"
-                  placeholder="Username"
+                  placeholder="Todo title"
                   type="text"
-                />
-              </div>
-              <div>
-                <input
-                  value={Password}
-                  onInput={(e) => setPassword(e.target.value)}
-                  type="password"
-                  className="drop-shadow-xl w-full h-[60px] rounded px-4"
-                  placeholder="Password"
                 />
               </div>
             </div>
             <div id="link" className="text-linkText mb-12">
               <i>
-                <Link to="/signup">
-                  Don't have an account yet? Create a new one here
-                </Link>
+                <Link to="/main">Go back</Link>
               </i>
             </div>
             <div id="btn" className="flex justify-center items-center w-[90%]">
@@ -118,14 +97,14 @@ export default function Login() {
                 className="cursor-pointer drop-shadow-xl w-[50%] h-[60px] flex items-center justify-center font-semibold rounded bg-white"
                 onClick={checkLogin}
               >
-                Login
+                Create todo
               </div>
             </div>
           </div>
-          {errorMessage && (
+          {statusMessage && (
             <p className="bottom-0 absolute py-8 px-4 mb-2 rounded bg-black text-white">
               {" "}
-              {errorMessage}{" "}
+              {statusMessage}{" "}
             </p>
           )}
         </div>
