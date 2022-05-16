@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { Spinner } from "@chakra-ui/spinner";
+import Todo from "../Todo/Todo";
 
 const cookies = new Cookies();
 
@@ -13,7 +14,7 @@ export default function Main() {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [todos, setTodos] = useState({});
+  const [todos, setTodos] = useState([]);
 
   const navigate = useNavigate();
 
@@ -24,13 +25,46 @@ export default function Main() {
     navigate("/login");
   };
 
+  const changeStatus = (event, title) => {
+    setIsLoading(true);
+    let data = {
+      owner: username,
+      title: title,
+      newstatus: 0,
+    };
+
+    const url = "http://localhost:3001/changeTodoStatus";
+    fetch(url, {
+      method: "POST",
+      cors: "*",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setIsLoading(false);
+        setStatusMessage(data.message);
+        setTodos(data.data);
+        console.log(todos);
+        setTimeout(() => {
+          setStatusMessage();
+        }, 3000);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        return console.error("Error:", error);
+      });
+    window.location.reload(false);
+    return;
+  };
+
   const getUserTodos = () => {
     setIsLoading(true);
     let data = {
       owner: username,
     };
-
-    console.log(data);
 
     const url = "http://localhost:3001/getTodos";
     fetch(url, {
@@ -69,8 +103,6 @@ export default function Main() {
     let data = {
       owner: cookies.get("username"),
     };
-
-    console.log(data);
 
     const url = "http://localhost:3001/getTodos";
     fetch(url, {
@@ -158,10 +190,25 @@ export default function Main() {
                 </h1>
               </div>
               <p className="text-xl w-[90%] pl-16">
-                You have currently X tasks awaiting completion
+                You have currently {todos ? todos.length : "0"} tasks awaiting
+                completion
               </p>
             </div>
-            <div id="inputs" className="w-[90%] mb-4"></div>
+            <div id="todos" className="w-[90%]">
+              {todos
+                ? todos.map(function (item, i) {
+                    if (item.status === 0) return <></>;
+                    return (
+                      <Todo
+                        key={i}
+                        title={item.Title}
+                        click={(event) => changeStatus(event, item.Title)}
+                        status={item.Status}
+                      />
+                    );
+                  })
+                : ""}
+            </div>
             <div id="link" className="text-linkText mb-12"></div>
             <div
               id="btn"
