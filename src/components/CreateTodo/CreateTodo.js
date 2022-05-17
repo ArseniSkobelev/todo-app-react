@@ -62,16 +62,18 @@ export default function CreateTodo() {
           />
         </div>
       ) : (
-        <div className="bg-bg h-[100vh] flex items-center flex-col py-12">
-          <div className="w-[90%] sm:w-[70%] md:w-[60%] items-center lg:w-[50%] xl:w-[30%] flex flex-col">
+        <div className="flex justify-center">
+          <div className="bg-bg h-[100vh] flex items-center flex-col bg-top-wave bg-no-repeat bg-top bg-contain w-[500px] px-8">
             <div id="upper" className="mb-12">
-              <h1 className="text-mainText text-3xl font-semibold mb-8">
-                ToDo App 🗿
-              </h1>
+              <div className="mb-32 pt-8">
+                <h1 className="text-white text-3xl font-semibold">
+                  ToDo App 🗿
+                </h1>
+              </div>
               <h1 className="text-mainText text-2xl font-semibold mb-2">
                 Create Todo
               </h1>
-              <p className="text-xl w-[70%]">
+              <p className="text-xl w-[90%]">
                 Enter a todo title and click the 'Create todo' button to create
                 a new todo.
               </p>

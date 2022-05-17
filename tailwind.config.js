@@ -3,14 +3,22 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'top-wave': "url(top-wave.svg)",
+        'bot-wave': "url(bot-wave.svg)",
+      }
+    },
     colors: {
-      bg: '#FBFBFB',
+      bg: '#F4F4F4',
       mainText: '#252525',
       linkText: '#7184E5',
       white: '#ffffff',
       black: '#000000',
       red: '#ff0000'
+    },
+    screens: {
+      '415': '415px',
     }
   },
   plugins: [],

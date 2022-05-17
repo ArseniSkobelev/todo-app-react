@@ -5,12 +5,12 @@ export default function Todo(props) {
     <>
       {props.status === 1 ? (
         <div
-          className="flex flex-row items-center w-[100%] bg-white drop-shadow-xl rounded h-[70px] px-8 mb-4"
+          className="flex flex-row items-center w-[100%] bg-white drop-shadow-xl rounded h-[70px] px-8 mb-6"
           id={props.title}
         >
           <div>
             <div
-              className="h-[20px] w-[20px] cursor-pointer shadow bg-white"
+              className="h-[20px] w-[20px] cursor-pointer drop-shadow-lg bg-white"
               onClick={props.click}
             ></div>
           </div>
