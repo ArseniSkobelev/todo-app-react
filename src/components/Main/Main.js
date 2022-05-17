@@ -143,58 +143,20 @@ export default function Main() {
           />
         </div>
       ) : (
-        <div className="bg-bg h-[100vh] flex items-center flex-col py-12">
-          <div className="w-[90%] sm:w-[70%] md:w-[60%] items-center lg:w-[50%] xl:w-[30%] flex flex-col">
-            <div id="upper" className="mb-12">
+        <div className="flex justify-center">
+          <div className="bg-bg h-[100vh] flex items-center flex-col bg-top-wave bg-no-repeat bg-top bg-contain w-[500px]">
+            <div id="upper" className="mb-16 py-8">
               <div id="upper-title" className="flex row items-center mb-2">
-                <div id="svg" className="flex items-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="44.943"
-                    height="26.657"
-                    viewBox="0 0 44.943 26.657"
-                    className="cursor-pointer"
-                    onClick={Logout}
-                  >
-                    <g
-                      id="Icon_feather-arrow-left"
-                      data-name="Icon feather-arrow-left"
-                      transform="translate(-5.5 -4.672)"
-                    >
-                      <path
-                        id="Path_1"
-                        data-name="Path 1"
-                        d="M48.443,18H7.5"
-                        transform="translate(0)"
-                        fill="none"
-                        stroke="#000"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="4"
-                      />
-                      <path
-                        id="Path_2"
-                        data-name="Path 2"
-                        d="M18,28.5,7.5,18,18,7.5"
-                        fill="none"
-                        stroke="#000"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="4"
-                      />
-                    </g>
-                  </svg>
-                </div>
-                <h1 className="text-mainText text-3xl font-semibold ml-4">
+                <h1 className="text-white text-3xl font-semibold">
                   Welcome back, <span className="capitalize">{username}</span>!
                 </h1>
               </div>
-              <p className="text-xl w-[90%] pl-16">
-                You have currently {todos ? todos.length : "0"} tasks awaiting
-                completion
+              <p className="text-xl text-white">
+                You have currently {todos ? todos.length : "0"}{" "}
+                {todos.length == 1 ? " task" : "tasks"} awaiting completion
               </p>
             </div>
-            <div id="todos" className="w-[90%]">
+            <div id="todos" className="w-[90%] overflow-auto h-[57%]">
               {todos
                 ? todos.map(function (item, i) {
                     if (item.status === 0) return <></>;
@@ -212,16 +174,18 @@ export default function Main() {
             <div id="link" className="text-linkText mb-12"></div>
             <div
               id="btn"
-              className="flex justify-center items-center w-[90%] flex-row"
+              className="flex justify-center items-center w-[90%] flex-col"
             >
-              <div className="cursor-pointer drop-shadow-xl w-[50%] h-[60px] flex text-center items-center justify-center font-semibold rounded bg-white">
-                <Link to="/create">Create a new todo</Link>
-              </div>
+              <Link to="/create" className="w-full">
+                <div className="cursor-pointer drop-shadow-xl w-full mb-4 h-[60px] flex text-center items-center justify-center font-semibold rounded bg-white">
+                  Create a new todo
+                </div>
+              </Link>
               <div
-                className="ml-4 cursor-pointer drop-shadow-xl w-[50%] h-[60px] flex items-center text-center justify-center font-semibold rounded bg-white"
-                onClick={getUserTodos}
+                className="cursor-pointer drop-shadow-xl w-full h-[60px] flex items-center text-center justify-center font-semibold rounded bg-white"
+                onClick={Logout}
               >
-                Refresh
+                Logout
               </div>
             </div>
           </div>
