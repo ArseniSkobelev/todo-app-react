@@ -118,7 +118,7 @@ export default function Signup() {
               <div id="link" className="text-linkText mt-4">
                 <i>
                   <Link to="/login">
-                    Don't have an account yet? Create a new one here
+                    Already have an account? Login here
                   </Link>
                 </i>
               </div>
@@ -132,7 +132,7 @@ export default function Signup() {
                   className="cursor-pointer drop-shadow-xl w-[90%] h-[60px] flex items-center justify-center font-semibold rounded bg-white"
                   onClick={createUser}
                 >
-                  Login
+                  Create account
                 </div>
               </div>
             </div>

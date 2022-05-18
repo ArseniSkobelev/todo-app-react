@@ -144,16 +144,16 @@ export default function Main() {
         </div>
       ) : (
         <div className="flex justify-center">
-          <div className="bg-bg h-[100vh] flex items-center flex-col bg-top-wave bg-no-repeat bg-top bg-contain w-[500px]">
-            <div id="upper" className="mb-16 py-8">
-              <div id="upper-title" className="flex row items-center mb-2">
-                <h1 className="text-white text-3xl font-semibold">
+          <div className="bg-bg h-[100vh] flex items-center mt-auto flex-col bg-top-wave bg-no-repeat bg-top bg-contain w-[500px]">
+            <div id="upper" className="mb-24 500:mb-16 py-2 px-4 500:py-8 500:px-0 415:py-6">
+              <div id="upper-title" className="flex row items-center">
+                <h1 className="text-white text-xl 500:text-3xl 500:mb-2 font-semibold">
                   Welcome back, <span className="capitalize">{username}</span>!
                 </h1>
               </div>
-              <p className="text-xl text-white">
-                You have currently {todos ? todos.length : "0"}{" "}
-                {todos.length == 1 ? " task" : "tasks"} awaiting completion
+              <p className="text-white 500:text-xl">
+                You have currently {todos ? todos.length + " " : "0 "}
+                {todos && todos.length == 1 ? " task" : "tasks"} awaiting completion
               </p>
             </div>
             <div id="todos" className="w-[90%] overflow-auto h-[57%]">
@@ -174,7 +174,7 @@ export default function Main() {
             <div id="link" className="text-linkText mb-12"></div>
             <div
               id="btn"
-              className="flex justify-center items-center w-[90%] flex-col"
+              className="flex justify-center items-center w-[90%] flex-col mb-4"
             >
               <Link to="/create" className="w-full">
                 <div className="cursor-pointer drop-shadow-xl w-full mb-4 h-[60px] flex text-center items-center justify-center font-semibold rounded bg-white">
