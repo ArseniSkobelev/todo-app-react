@@ -21,6 +21,12 @@ export default function Signup() {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
 
+  const handleKeyPress = (e) => {
+    if (e.code === "Enter" || e.code === "NumpadEnter") {
+      createUser();
+    }
+  };
+
   async function createUser() {
     setIsLoading(true);
     let data = {
@@ -53,6 +59,10 @@ export default function Signup() {
       .catch((error) => {
         setIsLoading(false);
         console.error("Error:", error);
+        setErrorMessage("❌ Sum ting wong!");
+        setTimeout(() => {
+          setErrorMessage();
+        }, 3000);
       });
     return;
   }
@@ -112,14 +122,13 @@ export default function Signup() {
                     type="password"
                     className="drop-shadow-xl w-full h-[60px] rounded px-4"
                     placeholder="Password"
+                    onKeyDown={(event) => handleKeyPress(event, "hello world")}
                   />
                 </div>
               </div>
               <div id="link" className="text-linkText mt-4">
                 <i>
-                  <Link to="/login">
-                    Already have an account? Login here
-                  </Link>
+                  <Link to="/login">Already have an account? Login here</Link>
                 </i>
               </div>
             </div>

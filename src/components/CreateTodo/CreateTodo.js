@@ -15,7 +15,13 @@ export default function CreateTodo() {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  async function checkLogin() {
+  const handleKeyPress = (e) => {
+    if (e.code === "Enter" || e.code === "NumpadEnter") {
+      createTodo();
+    }
+  };
+
+  async function createTodo() {
     setIsLoading(true);
     let data = {
       title: TodoTitle,
@@ -86,6 +92,7 @@ export default function CreateTodo() {
                   className="drop-shadow-xl w-full h-[60px] rounded px-4"
                   placeholder="Todo title"
                   type="text"
+                  onKeyDown={(event) => handleKeyPress(event, "hello world")}
                 />
               </div>
             </div>
@@ -97,7 +104,7 @@ export default function CreateTodo() {
             <div id="btn" className="flex justify-center items-center w-[90%]">
               <div
                 className="cursor-pointer drop-shadow-xl w-[50%] h-[60px] flex items-center justify-center font-semibold rounded bg-white"
-                onClick={checkLogin}
+                onClick={createTodo}
               >
                 Create todo
               </div>
