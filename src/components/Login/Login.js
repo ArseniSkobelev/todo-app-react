@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
@@ -18,6 +18,12 @@ export default function Login() {
 
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const handleKeyPress = (e) => {
+    if (e.code === "Enter" || e.code === "NumpadEnter") {
+      checkLogin();
+    }
+  };
 
   async function checkLogin() {
     setIsLoading(true);
@@ -104,6 +110,7 @@ export default function Login() {
                     type="password"
                     className="drop-shadow-xl w-full h-[60px] rounded px-4"
                     placeholder="Password"
+                    onKeyDown={(event) => handleKeyPress(event, "hello world")}
                   />
                 </div>
               </div>
