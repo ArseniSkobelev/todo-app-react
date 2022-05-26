@@ -60,38 +60,6 @@ export default function Main() {
     return;
   };
 
-  const getUserTodos = () => {
-    setIsLoading(true);
-    let data = {
-      owner: username,
-    };
-
-    const url = "http://localhost:3001/getTodos";
-    fetch(url, {
-      method: "POST",
-      cors: "*",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setIsLoading(false);
-        setStatusMessage(data.message);
-        setTodos(data.data);
-        console.log(todos);
-        setTimeout(() => {
-          setStatusMessage();
-        }, 3000);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        return console.error("Error:", error);
-      });
-    return;
-  };
-
   useEffect(() => {
     if (userSession === false) {
       navigate("/login");
@@ -153,7 +121,7 @@ export default function Main() {
               </div>
               <p className="text-white 500:text-xl">
                 You have currently {todos ? todos.length + " " : "0 "}
-                {todos && todos.length == 1 ? " task" : "tasks"} awaiting completion
+                {todos && todos.length === 1 ? " task" : "tasks"} awaiting completion
               </p>
             </div>
             <div id="todos" className="w-[90%] overflow-auto h-[57%]">
